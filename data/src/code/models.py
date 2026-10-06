@@ -240,6 +240,11 @@ class lk:
         import matplotlib.pyplot as plt
 
         ext_data = pd.read_csv(input_data, delimiter=",")
+
+        e_min = min(dataframe["EXX"].min(), ext_data["EXX"].min())
+        e_max = max(dataframe["EXX"].max(), ext_data["EXX"].max())
+        s_min = min(dataframe["SXX"].min(), ext_data["SXX"].min())
+        s_max = max(dataframe["SXX"].max(), ext_data["SXX"].max())
         
         fig, ax = plt.subplots(nrows = 1, 
                                ncols = 1,
@@ -251,15 +256,15 @@ class lk:
         ax.legend(frameon=True, loc='upper left', fontsize=12, facecolor='white', edgecolor='black')
         ax.grid(True)
 
-        if dataframe["EXX"].min() < 0:
-            ax.set_xlim([dataframe["EXX"].min()*1.1, dataframe["EXX"].max()*1.1])
+        if e_min < 0:
+            ax.set_xlim([e_min*1.1, e_max*1.1])
         else:
-            ax.set_xlim([0, dataframe["EXX"].max()*1.1])
+            ax.set_xlim([0, e_max*1.1])
 
-        if dataframe["SXX"].min() < 0:
-            ax.set_ylim([dataframe["SXX"].min()*1.1, dataframe["SXX"].max()*1.1])
+        if s_min < 0:
+            ax.set_ylim([s_min*1.1, s_max*1.1])
         else:
-            ax.set_ylim([0, dataframe["SXX"].max()*1.1])
+            ax.set_ylim([0, s_max*1.1])
         ax.set_xlabel("Strain (mm/mm)")
         ax.set_ylabel("Stress (MPa)")
 
